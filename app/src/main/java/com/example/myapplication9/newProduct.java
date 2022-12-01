@@ -30,7 +30,8 @@ public class newProduct {
         this.productID = productID;
     }
 
-    public newProduct(){
+    public newProduct() {
+
 
     }
 

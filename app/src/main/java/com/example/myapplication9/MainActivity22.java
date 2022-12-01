@@ -2,7 +2,7 @@ package com.example.myapplication9;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -11,7 +11,6 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -21,7 +20,7 @@ import com.google.firebase.database.ValueEventListener;
 
 
 
-public class MainActivity2 extends AppCompatActivity {
+public class MainActivity22 extends AppCompatActivity {
     private EditText productID, productType, productName;
     private Button sendDatabtn;
 
@@ -32,21 +31,24 @@ public class MainActivity2 extends AppCompatActivity {
     newProduct newProduct;
 
 
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main2);
+        setContentView(R.layout.activity_main22);
 
         productID = findViewById(R.id.productID);
         productType = findViewById(R.id.productType);
         productName = findViewById(R.id.productName);
 
-
+        //rootNode
         firebaseDatabase = FirebaseDatabase.getInstance();
-
+        //reference
         databaseReference = firebaseDatabase.getReference("Products");
 
-        newProduct = new newProduct();
+
+
+
 
         sendDatabtn = findViewById(R.id.sendData);
 
@@ -55,20 +57,21 @@ public class MainActivity2 extends AppCompatActivity {
             public void onClick(View view) {
                 String Type = productType.getText().toString();
                 String Name = productName.getText().toString();
-                String ID = productID.getText().toString();
+                int ID = Integer.parseInt(productID.getText().toString());
+                newProduct = new newProduct();
+//                newProduct product = new newProduct(Type,Name,ID);
                 // below line is for checking whether the
                 // edittext fields are empty or not.
-                if (TextUtils.isEmpty(Type) && TextUtils.isEmpty(Name) && TextUtils.isEmpty(ID)) {
+                if (TextUtils.isEmpty(Type) && TextUtils.isEmpty(Name)) {
                     // if the text fields are empty
                     // then show the below message.
-                    Toast.makeText(MainActivity2.this, "Please add some data.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity22.this, "Please add some data.", Toast.LENGTH_SHORT).show();
                 } else {
                     // else call the method to add
                     // data to our database.
-                    addDatatoFirebase(Type, Name, ID);
-                    Intent activityIntent = new Intent(getApplicationContext(), MainActivity.class);
-                    startActivity(activityIntent);
-//                    System.out.println("All good");
+//                    addDatatoFirebase(Type, Name, ID);
+                    databaseReference.child(String.valueOf(ID)).setValue(newProduct);
+
                 }
             }
         });
@@ -86,17 +89,17 @@ public class MainActivity2 extends AppCompatActivity {
                 // inside the method of on Data change we are setting
                 // our object class to our database reference.
                 // data base reference will sends data to firebase.
-                databaseReference.child(ID).setValue(newProduct);
+                databaseReference.setValue(newProduct);
 
                 // after adding this data we are showing toast message.
-                Toast.makeText(MainActivity2.this, "data added", Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity22.this, "data added", Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
                 // if the data is not added or it is cancelled then
                 // we are displaying a failure toast message.
-                Toast.makeText(MainActivity2.this, "Fail to add data " + error, Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity22.this, "Fail to add data " + error, Toast.LENGTH_SHORT).show();
             }
         });
     }
