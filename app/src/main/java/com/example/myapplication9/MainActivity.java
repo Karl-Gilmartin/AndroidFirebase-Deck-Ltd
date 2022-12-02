@@ -1,5 +1,6 @@
 package com.example.myapplication9;
 
+import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -32,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
 
             public void onClick(View v) {
                 System.out.println("Button Clicked");
-                Intent activity2Intent = new Intent(getApplicationContext(), ProductDetails.class);
+                Intent activity2Intent = new Intent(getApplicationContext(), MainActivity2.class);
                 startActivity(activity2Intent);
 
             }

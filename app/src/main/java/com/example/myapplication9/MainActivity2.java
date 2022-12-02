@@ -11,6 +11,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -20,7 +21,7 @@ import com.google.firebase.database.ValueEventListener;
 
 
 
-public class ProductDetails extends AppCompatActivity {
+public class MainActivity2 extends AppCompatActivity {
     private EditText productID, productType, productName;
     private Button sendDatabtn;
 
@@ -60,7 +61,7 @@ public class ProductDetails extends AppCompatActivity {
                 if (TextUtils.isEmpty(Type) && TextUtils.isEmpty(Name) && TextUtils.isEmpty(ID)) {
                     // if the text fields are empty
                     // then show the below message.
-                    Toast.makeText(ProductDetails.this, "Please add some data.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity2.this, "Please add some data.", Toast.LENGTH_SHORT).show();
                 } else {
                     // else call the method to add
                     // data to our database.
@@ -88,14 +89,14 @@ public class ProductDetails extends AppCompatActivity {
                 databaseReference.child(ID).setValue(newProduct);
 
                 // after adding this data we are showing toast message.
-                Toast.makeText(ProductDetails.this, "data added", Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity2.this, "data added", Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
                 // if the data is not added or it is cancelled then
                 // we are displaying a failure toast message.
-                Toast.makeText(ProductDetails.this, "Fail to add data " + error, Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity2.this, "Fail to add data " + error, Toast.LENGTH_SHORT).show();
             }
         });
     }
