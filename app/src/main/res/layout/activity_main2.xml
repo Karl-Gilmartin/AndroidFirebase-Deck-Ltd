@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity2">
+    tools:context=".ProductDetails">
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -57,12 +57,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/productType"
-            android:layout_margin="20dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="10dp"
-            android:layout_marginBottom="10dp"
-            android:text="Add employee details"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="20dp"
+            android:text="Add Item's Details"
             android:textAllCaps="false" />
     </RelativeLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
