@@ -1,6 +1,11 @@
 package com.example.myapplication9;
 
+import android.os.Bundle;
+
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -12,59 +17,33 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Random;
-import java.util.stream.Stream;
 
-public class newProduct  {
-    private String productName, productID, productType;
-    private int productQuantity;
+public class MainActivity3 extends AppCompatActivity {
 
-    public String getProductName() {
-        return productName;
-    }
 
-    public void setProductName(String productName) {
-        this.productName = productName;
-    }
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        // ...
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_inventory);
 
-    public String getProductID() {
-        return productID;
-    }
+//        ArrayList<newProduct> products = newProduct.generateProductListFromFirebase();
+//        ArrayList<newProduct> products = newProduct.generateProductList(10);
+//        ArrayList<newProduct> firebaseProducts = newProduct.generateProductListFromFirebase();
 
-    public void setProductID(String productID) {
-        this.productID = productID;
-    }
+//        for(newProduct product: products) {
+//            System.out.println("\n\nNon-Firebase...");
+//            product.printProduct();
+//        }
+//        for(newProduct product: firebaseProducts) {
+//            System.out.println("\n\nFIREBASE...");
+//            product.printProduct();
+//        }
 
-    public int getProductQuantity() {
-        return productQuantity;
-    }
+        RecyclerView rvDetails = (RecyclerView) findViewById(R.id.recyclerView);
 
-    public void setProductQuantity(int productQuantity) {
-        this.productQuantity = productQuantity;
-    }
+        // Lookup the recyclerview in activity layout
 
-    public String getProductType() {
-        return productType;
-    }
-
-    public void setProductType(String productType) {
-        this.productType = productType;
-    }
-
-    public newProduct(String name, String id, String type, int quantity) {
-        productName = name;
-        productID = id;
-        productType = type;
-        productQuantity = quantity;
-    }
-
-    public void printProduct() {
-        System.out.println("Product Name: " + productName + "\nProduct ID: " + productID + "\nProduct Type: " + productType + "\nProduct Quantity: " + productQuantity);
-    }
-
-//    ArrayList<newProduct> products = new ArrayList<>();
-
-    public static ArrayList<newProduct> generateProductListFromFirebase() {
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference ref = database.getReference("Products");
 
@@ -90,29 +69,17 @@ public class newProduct  {
 
                     products.add(product);
 
+                    DetailsAdapter adapter = new DetailsAdapter(products);
+
+                    rvDetails.setAdapter(adapter);
                 }
             }
             @Override
             public void onCancelled(DatabaseError databaseError) {
                 System.out.println("The read failed: " + databaseError.getCode());
             }
-
         });
-
-        System.out.println(products.size());
-        return products;
-    }
-
-    public static ArrayList<newProduct> generateProductList(int numOfItems) {
-        ArrayList<newProduct> products = new ArrayList<newProduct>();
-
-        Random random = new Random();
-        for (int i = 0; i < numOfItems; i++) {
-            newProduct product = new newProduct("Item name", Integer.toString(random.nextInt(1000)), "Chair", 6);
-            products.add(product);
-        }
-
-        return products;
+        rvDetails.setLayoutManager(new LinearLayoutManager(this));
     }
 
 }

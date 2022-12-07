@@ -22,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Button newItemBtn = (Button)findViewById(R.id.NewProduct);
         Button scanItem = (Button) findViewById(R.id.scanItem);
+        Button checkInventory = (Button) findViewById(R.id.checkInventory);
 
         scanItem.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -36,6 +37,15 @@ public class MainActivity extends AppCompatActivity {
                 Intent activity2Intent = new Intent(getApplicationContext(), MainActivity2.class);
                 startActivity(activity2Intent);
 
+            }
+        });
+
+        checkInventory.setOnClickListener(new View.OnClickListener() {
+
+            public void onClick(View v) {
+                System.out.println("Check Inventory Button Clicked");
+                Intent activity3intent = new Intent(getApplicationContext(), MainActivity3.class);
+                startActivity(activity3intent);
             }
         });
     }
@@ -56,7 +66,7 @@ ActivityResultLauncher<ScanOptions> barLauncher = registerForActivityResult(new 
         public void onClick(DialogInterface dialogInterface, int i) {
 
             dialogInterface.dismiss();
-            Intent showDetailActivity = new Intent(getApplicationContext(), ShowDetails.class);
+            Intent showDetailActivity = new Intent(getApplicationContext(), MainActivity2.class);
             startActivity(showDetailActivity);
 
         }

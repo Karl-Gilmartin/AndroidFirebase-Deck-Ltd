@@ -22,8 +22,8 @@ import com.google.firebase.database.ValueEventListener;
 
 
 public class MainActivity2 extends AppCompatActivity {
-    private EditText productID, productType, productName;
-    private Button sendDatabtn;
+    private EditText productID, productType, productName, productQuantity;
+    private Button sendDatabtn, cancelbtn;
 
     FirebaseDatabase firebaseDatabase;
 
@@ -40,15 +40,15 @@ public class MainActivity2 extends AppCompatActivity {
         productID = findViewById(R.id.productID);
         productType = findViewById(R.id.productType);
         productName = findViewById(R.id.productName);
+        productQuantity = findViewById(R.id.productQuantity);
 
 
         firebaseDatabase = FirebaseDatabase.getInstance();
 
         databaseReference = firebaseDatabase.getReference("Products");
 
-        newProduct = new newProduct();
-
         sendDatabtn = findViewById(R.id.sendData);
+        cancelbtn = findViewById(R.id.cancel);
 
         sendDatabtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -56,6 +56,7 @@ public class MainActivity2 extends AppCompatActivity {
                 String Type = productType.getText().toString();
                 String Name = productName.getText().toString();
                 String ID = productID.getText().toString();
+                int Quantity = Integer.parseInt(productQuantity.getText().toString());
                 // below line is for checking whether the
                 // edittext fields are empty or not.
                 if (TextUtils.isEmpty(Type) && TextUtils.isEmpty(Name) && TextUtils.isEmpty(ID)) {
@@ -65,19 +66,27 @@ public class MainActivity2 extends AppCompatActivity {
                 } else {
                     // else call the method to add
                     // data to our database.
-                    addDatatoFirebase(Type, Name, ID);
+                    addDatatoFirebase(Type, Name, ID, Quantity);
                     Intent activityIntent = new Intent(getApplicationContext(), MainActivity.class);
                     startActivity(activityIntent);
 //                    System.out.println("All good");
                 }
             }
         });
+        cancelbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent activityIntent = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(activityIntent);
+            }
+        });
     }
 
-    private void addDatatoFirebase(String Type, String Name, String ID) {
+    private void addDatatoFirebase(String Type, String Name, String ID, int Quantity) {
         newProduct.setProductType(Type);
         newProduct.setProductName(Name);
-        newProduct.setProductID(Integer.parseInt(ID));
+        newProduct.setProductID(ID);
+        newProduct.setProductQuantity(Quantity);
         // we are use add value event listener method
         // which is called with database reference.
         databaseReference.addValueEventListener(new ValueEventListener() {
