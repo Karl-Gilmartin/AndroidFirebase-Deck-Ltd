@@ -40,14 +40,14 @@ public class MainActivity3 extends AppCompatActivity {
                     Map<String, Object> results = (HashMap<String, Object>) snapshot.getValue();
                     int quantity = 0;
                     if(results.get("productQuantity") != null) {
-                        quantity = Integer.parseInt((String) results.get("productQuantity"));
+                        quantity = Integer.parseInt(results.get("productQuantity").toString());
                     }
-                    newProduct product = new newProduct("name not found", "id not found", "type not found", "0");
+                    newProduct product = new newProduct("name not found", "id not found", "type not found", 0);
 
                     product.setProductName((String) results.get("productName"));
-                    product.setProductID((String) Long.toString((Long) results.get("productID")));
+                    product.setProductID((String) results.get("productID"));
                     product.setProductType((String) results.get("productType"));
-                    product.setProductQuantity(String.valueOf(quantity));
+                    product.setProductQuantity(quantity);
 
                     products.add(product);
 

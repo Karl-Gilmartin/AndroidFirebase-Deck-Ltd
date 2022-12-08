@@ -37,7 +37,7 @@ public class DetailsAdapter extends RecyclerView.Adapter<DetailsAdapter.ViewHold
         TextView idTextView = holder.idTextView;
         idTextView.setText(product.getProductID());
         TextView quantityTextView = holder.quantityTextView;
-        quantityTextView.setText(Integer.toString(Integer.parseInt(product.getProductQuantity())));
+        quantityTextView.setText(Integer.toString(product.getProductQuantity()));
         TextView typeTextView = holder.typeTextView;
         typeTextView.setText(product.getProductType());
     }

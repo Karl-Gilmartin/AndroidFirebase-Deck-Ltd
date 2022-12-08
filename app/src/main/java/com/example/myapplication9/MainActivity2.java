@@ -29,7 +29,7 @@ public class MainActivity2 extends AppCompatActivity {
 
     DatabaseReference databaseReference;
 
-    newProduct newProduct;
+    newProduct newProduct = new newProduct("", "", "", 0);
 
 
     @Override
@@ -64,9 +64,10 @@ public class MainActivity2 extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 String Type = productType.getText().toString();
+                System.out.println(Type);
                 String Name = productName.getText().toString();
                 String ID = productID.getText().toString();
-                String Quainity = productQuantity.getText().toString();
+                int Quantity = Integer.parseInt(productQuantity.getText().toString());
                 // below line is for checking whether the
                 // edittext fields are empty or not.
                 if (TextUtils.isEmpty(Type) && TextUtils.isEmpty(Name) && TextUtils.isEmpty(ID)) {
@@ -76,7 +77,7 @@ public class MainActivity2 extends AppCompatActivity {
                 } else {
                     // else call the method to add
                     // data to our database.
-                    addDatatoFirebase(Type, Name, ID,Quainity );
+                    addDatatoFirebase(Type, Name, ID, Quantity );
                     Intent activityIntent = new Intent(getApplicationContext(), MainActivity.class);
                     startActivity(activityIntent);
 //                    System.out.println("All good");
@@ -85,11 +86,11 @@ public class MainActivity2 extends AppCompatActivity {
         });
     }
 
-    private void addDatatoFirebase(String Type, String Name, String ID, String Quainity) {
+    private void addDatatoFirebase(String Type, String Name, String ID, int Quantity) {
         newProduct.setProductType(Type);
         newProduct.setProductName(Name);
-        newProduct.setProductID(String.valueOf(Integer.parseInt(ID)));
-        newProduct.setProductQuantity(String.valueOf(Integer.parseInt(Quainity)));
+        newProduct.setProductID(ID);
+        newProduct.setProductQuantity(Quantity);
 
         // we are use add value event listener method
         // which is called with database reference.

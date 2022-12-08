@@ -16,7 +16,8 @@ import java.util.Random;
 import java.util.stream.Stream;
 
 public class newProduct  {
-    private String productName, productID,productQuantity, productType;
+    private String productName, productID, productType;
+    private int productQuantity;
 
 
     public String getProductName() {
@@ -35,11 +36,11 @@ public class newProduct  {
         this.productID = productID;
     }
 
-    public String getProductQuantity() {
+    public int getProductQuantity() {
         return productQuantity;
     }
 
-    public void setProductQuantity(String productQuantity) {
+    public void setProductQuantity(int productQuantity) {
         this.productQuantity = productQuantity;
     }
 
@@ -51,7 +52,7 @@ public class newProduct  {
         this.productType = productType;
     }
 
-    public newProduct(String name, String id, String type, String quantity) {
+    public newProduct(String name, String id, String type, int quantity) {
         productName = name;
         productID = id;
         productType = type;
@@ -81,12 +82,12 @@ public class newProduct  {
                     if(results.get("productQuantity") != null) {
                         quantity = Integer.parseInt((String) results.get("productQuantity"));
                     }
-                    newProduct product = new newProduct("name not found", "id not found", "type not found", "0");
+                    newProduct product = new newProduct("name not found", "id not found", "type not found", 0);
 
                     product.setProductName((String) results.get("productName"));
                     product.setProductID((String) Long.toString((Long) results.get("productID")));
                     product.setProductType((String) results.get("productType"));
-                    product.setProductQuantity(String.valueOf(quantity));
+                    product.setProductQuantity(quantity);
 
                     products.add(product);
 
@@ -104,11 +105,11 @@ public class newProduct  {
     }
 
     public static ArrayList<newProduct> generateProductList(int numOfItems) {
-        ArrayList<newProduct> products = new ArrayList<newProduct>();
+        ArrayList<newProduct> products = new ArrayList<>();
 
         Random random = new Random();
         for (int i = 0; i < numOfItems; i++) {
-            newProduct product = new newProduct("Item name", Integer.toString(random.nextInt(1000)), "Chair", "6");
+            newProduct product = new newProduct("Item name", Integer.toString(random.nextInt(1000)), "Chair", 6);
             products.add(product);
         }
 
