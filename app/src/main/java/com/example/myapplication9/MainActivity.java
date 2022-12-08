@@ -16,12 +16,15 @@ import com.journeyapps.barcodescanner.ScanOptions;
 
 public class MainActivity extends AppCompatActivity {
 
+    public static int findProductID = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Button newItemBtn = (Button)findViewById(R.id.NewProduct);
+        Button newItemBtn = (Button)findViewById(R.id.newProduct);
         Button scanItem = (Button) findViewById(R.id.scanItem);
+        Button checkInventory = (Button) findViewById(R.id.checkInventory);
 
         scanItem.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -38,6 +41,15 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+
+        checkInventory.setOnClickListener(new View.OnClickListener() {
+
+            public void onClick(View v) {
+                System.out.println("Check Inventory Button Clicked");
+                Intent activity3intent = new Intent(getApplicationContext(), MainActivity3.class);
+                startActivity(activity3intent);
+            }
+        });
     }
     public void scanCode(){
         ScanOptions options = new ScanOptions();
@@ -47,19 +59,21 @@ public class MainActivity extends AppCompatActivity {
         options.setCaptureActivity(CaptureAct.class);
         barLauncher.launch(options);
     }
-ActivityResultLauncher<ScanOptions> barLauncher = registerForActivityResult(new ScanContract(), result -> {
-    AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-    builder.setTitle("Result");
-    builder.setMessage(result.getContents());
-    builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-        @Override
-        public void onClick(DialogInterface dialogInterface, int i) {
+    ActivityResultLauncher<ScanOptions> barLauncher = registerForActivityResult(new ScanContract(), result -> {
+        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+        builder.setTitle("Result");
+        findProductID = Integer.parseInt(result.getContents());
+    //    builder.setMessage(result.getContents());
+        builder.setMessage("Valid Barcode Scanned");
+        builder.setPositiveButton("View Data", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
 
-            dialogInterface.dismiss();
-            Intent showDetailActivity = new Intent(getApplicationContext(), ShowDetails.class);
-            startActivity(showDetailActivity);
+                dialogInterface.dismiss();
+                Intent showDetailActivity = new Intent(getApplicationContext(), ShowDetails.class);
+                startActivity(showDetailActivity);
 
-        }
-    }).show();
+            }
+        }).show();
 });
 }

@@ -9,59 +9,85 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+
         <EditText
             android:id="@+id/productName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_above="@+id/productType"
             android:layout_centerHorizontal="true"
             android:layout_marginStart="50dp"
-            android:layout_marginTop="50dp"
             android:layout_marginEnd="50dp"
-            android:layout_marginBottom="50dp"
+            android:layout_marginBottom="49dp"
             android:hint="Enter Product Name"
             android:importantForAutofill="no"
             android:inputType="textPersonName"
             android:minHeight="48dp" />
 
-
         <EditText
-            android:id="@+id/productID"
+            android:id="@+id/productQuantity"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/productName"
-            android:layout_marginStart="50dp"
-            android:layout_marginTop="50dp"
-            android:layout_marginEnd="50dp"
-            android:layout_marginBottom="50dp"
-            android:hint="Enter Product ID Number"
-            android:importantForAutofill="no"
-            android:inputType="phone"
+            android:layout_above="@+id/sendData"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="52dp"
+            android:layout_marginEnd="47dp"
+            android:layout_marginBottom="67dp"
+            android:hint="Enter Product Quantity"
+            android:inputType="text"
             android:minHeight="48dp" />
 
         <EditText
             android:id="@+id/productType"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/productID"
+            android:layout_above="@+id/productQuantity"
             android:layout_marginStart="50dp"
-            android:layout_marginTop="50dp"
             android:layout_marginEnd="50dp"
             android:layout_marginBottom="50dp"
             android:hint="Enter Product Type"
             android:inputType="textPostalAddress"
             android:minHeight="48dp" />
 
+        <EditText
+            android:id="@+id/productID"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/productName"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="51dp"
+            android:layout_marginEnd="48dp"
+            android:layout_marginBottom="45dp"
+            android:hint="Enter Product ID Number"
+            android:importantForAutofill="no"
+            android:inputType="phone"
+            android:minHeight="48dp" />
 
         <Button
             android:id="@+id/sendData"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/productType"
+            android:layout_above="@+id/cancel"
             android:layout_marginStart="20dp"
-            android:layout_marginTop="20dp"
             android:layout_marginEnd="20dp"
-            android:layout_marginBottom="20dp"
-            android:text="Add Item's Details"
+            android:layout_marginBottom="15dp"
+            android:text="Add Item"
             android:textAllCaps="false" />
+
+        <Button
+            android:id="@+id/cancel"
+            android:layout_width="115dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="149dp"
+            android:layout_marginEnd="147dp"
+            android:layout_marginBottom="120dp"
+            android:autoText="false"
+            android:backgroundTint="#9C9B9B"
+            android:text="Cancel" />
     </RelativeLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
