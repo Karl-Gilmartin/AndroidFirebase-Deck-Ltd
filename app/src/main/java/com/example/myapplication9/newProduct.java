@@ -16,8 +16,8 @@ import java.util.Random;
 import java.util.stream.Stream;
 
 public class newProduct  {
-    private String productName, productID, productType;
-    private int productQuantity;
+    private String productName, productID,productQuantity, productType;
+
 
     public String getProductName() {
         return productName;
@@ -35,11 +35,11 @@ public class newProduct  {
         this.productID = productID;
     }
 
-    public int getProductQuantity() {
+    public String getProductQuantity() {
         return productQuantity;
     }
 
-    public void setProductQuantity(int productQuantity) {
+    public void setProductQuantity(String productQuantity) {
         this.productQuantity = productQuantity;
     }
 
@@ -51,7 +51,7 @@ public class newProduct  {
         this.productType = productType;
     }
 
-    public newProduct(String name, String id, String type, int quantity) {
+    public newProduct(String name, String id, String type, String quantity) {
         productName = name;
         productID = id;
         productType = type;
@@ -81,12 +81,12 @@ public class newProduct  {
                     if(results.get("productQuantity") != null) {
                         quantity = Integer.parseInt((String) results.get("productQuantity"));
                     }
-                    newProduct product = new newProduct("name not found", "id not found", "type not found", 0);
+                    newProduct product = new newProduct("name not found", "id not found", "type not found", "0");
 
                     product.setProductName((String) results.get("productName"));
                     product.setProductID((String) Long.toString((Long) results.get("productID")));
                     product.setProductType((String) results.get("productType"));
-                    product.setProductQuantity(quantity);
+                    product.setProductQuantity(String.valueOf(quantity));
 
                     products.add(product);
 
@@ -108,7 +108,7 @@ public class newProduct  {
 
         Random random = new Random();
         for (int i = 0; i < numOfItems; i++) {
-            newProduct product = new newProduct("Item name", Integer.toString(random.nextInt(1000)), "Chair", 6);
+            newProduct product = new newProduct("Item name", Integer.toString(random.nextInt(1000)), "Chair", "6");
             products.add(product);
         }
 

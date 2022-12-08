@@ -66,7 +66,7 @@ public class MainActivity2 extends AppCompatActivity {
                 String Type = productType.getText().toString();
                 String Name = productName.getText().toString();
                 String ID = productID.getText().toString();
-                int Quainity = Integer.parseInt(productQuantity.getText().toString());
+                String Quainity = productQuantity.getText().toString();
                 // below line is for checking whether the
                 // edittext fields are empty or not.
                 if (TextUtils.isEmpty(Type) && TextUtils.isEmpty(Name) && TextUtils.isEmpty(ID)) {
@@ -85,11 +85,11 @@ public class MainActivity2 extends AppCompatActivity {
         });
     }
 
-    private void addDatatoFirebase(String Type, String Name, String ID, int Quainity) {
+    private void addDatatoFirebase(String Type, String Name, String ID, String Quainity) {
         newProduct.setProductType(Type);
         newProduct.setProductName(Name);
         newProduct.setProductID(String.valueOf(Integer.parseInt(ID)));
-        newProduct.setProductQuantity(Integer.parseInt(String.valueOf(Quainity)));
+        newProduct.setProductQuantity(String.valueOf(Integer.parseInt(Quainity)));
 
         // we are use add value event listener method
         // which is called with database reference.
